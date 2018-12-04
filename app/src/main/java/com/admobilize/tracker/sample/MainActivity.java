@@ -29,9 +29,10 @@ public class MainActivity extends AppCompatActivity {
 
     private String detectorId;
     private TextView tvDeviceId;
+    private TextView tvStatus;
     private Button btnGetDeviceId;
     private Button btnStartStopService;
-    private boolean toggle;
+    private boolean toggle=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
 
         btnGetDeviceId      = findViewById(R.id.btn_get_device_id);
         btnStartStopService = findViewById(R.id.btn_start_stop);
-        tvDeviceId = findViewById(R.id.tv_deviceId);
+        tvDeviceId          = findViewById(R.id.tv_deviceId);
+        tvStatus            = findViewById(R.id.tv_status);
 
         btnGetDeviceId.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        if(detectorId==null)btnStartStopService.setEnabled(false);
+
     }
 
     public void getDetectorId() {
@@ -64,10 +68,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setServiceEnable(boolean enable) {
+
+        if(enable) tvStatus.setText("starting service..");
+        else tvStatus.setText("disabling service..");
+
         Intent intent = new Intent(action_enable);
         intent.putExtra(KEY_CAMERA_ENABLE, enable);
         intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
         sendBroadcast(intent);
+        btnStartStopService.setEnabled(false);
+    }
+
+
+    private void configReceiver(String detectorId) {
+
+        action_enable = "ACTION"+detectorId+"ENABLE";
+        action_start  = "ACTION"+detectorId+"SERVICE_START";
+        action_stop   = "ACTION"+detectorId+"SERVICE_STOP";
+
+        IntentFilter intentFilter = new IntentFilter();
+
+        intentFilter.addAction(action_detector_webhook);
+        intentFilter.addAction(action_get_detector_id);
+        intentFilter.addAction(action_on_detector_id);
+        intentFilter.addAction(action_enable);
+        intentFilter.addAction(action_start);
+        intentFilter.addAction(action_stop);
+
+        registerReceiver(mReceiver, intentFilter);
     }
 
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
@@ -92,41 +120,30 @@ public class MainActivity extends AppCompatActivity {
                    Log.d(TAG,"detectorId: "+detectorId);
                    tvDeviceId.setText(detectorId);
                    configReceiver(detectorId);
+                   btnStartStopService.setEnabled(true);
                 }
             }
             else if(action.equals(action_start)) {
 
                 Log.d(TAG,"service start");
                 btnStartStopService.setText("STOP BACKGROUND SERVICE");
+                toggle=false;
+                btnStartStopService.setEnabled(true);
+                tvStatus.setText("");
 
             }
             else if(action.equals(action_stop)) {
 
                 Log.d(TAG,"service stop");
                 btnStartStopService.setText("START BACKGROUND SERVICE");
+                toggle=true;
+                btnStartStopService.setEnabled(true);
+                tvStatus.setText("");
 
             }
 
         }
     };
-
-    private void configReceiver(String detectorId) {
-
-        action_enable = "ACTION"+detectorId+"ENABLE";
-        action_start =  "ACTION"+detectorId+"SERVICE_START";
-        action_stop = "ACTION"+detectorId+"SERVICE_STOP";
-
-        IntentFilter intentFilter = new IntentFilter();
-
-        intentFilter.addAction(action_detector_webhook);
-        intentFilter.addAction(action_get_detector_id);
-        intentFilter.addAction(action_on_detector_id);
-        intentFilter.addAction(action_enable);
-        intentFilter.addAction(action_start);
-        intentFilter.addAction(action_stop);
-
-        registerReceiver(mReceiver, intentFilter);
-    }
 
     @Override
     protected void onResume() {
