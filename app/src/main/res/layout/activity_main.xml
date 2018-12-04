@@ -6,18 +6,17 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_get_device_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="GET DETECTOR ID" />
 
-
     <TextView
         android:id="@+id/tv_deviceId_hint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/button"
+        android:layout_below="@id/btn_get_device_id"
         android:text="DeviceId:"
         android:textSize="24sp" />
 
@@ -26,8 +25,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_deviceId_hint"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="1dp"
+        android:textAlignment="center"
         android:text=""
-        android:textSize="20sp" />
+        android:textSize="19sp" />
+
+
+    <Button
+        android:id="@+id/btn_start_stop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_deviceId"
+        android:layout_marginTop="15dp"
+        android:text="start background service" />
+
 
 </RelativeLayout>
