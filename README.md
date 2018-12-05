@@ -38,4 +38,75 @@ For more details please see oficial documentation
 
 ### Implementation Details
 
+Register Broadcast Receiver with `detectorId`.
+
+``` java
+    private void configReceiver(String detectorId) {
+
+        action_enable = "ACTION"+detectorId+"ENABLE";
+        action_start  = "ACTION"+detectorId+"SERVICE_START";
+        action_stop   = "ACTION"+detectorId+"SERVICE_STOP";
+
+        IntentFilter intentFilter = new IntentFilter();
+
+        intentFilter.addAction(action_detector_webhook);
+        intentFilter.addAction(action_get_detector_id);
+        intentFilter.addAction(action_on_detector_id);
+        intentFilter.addAction(action_enable);
+        intentFilter.addAction(action_start);
+        intentFilter.addAction(action_stop);
+
+        registerReceiver(mReceiver, intentFilter);
+    }
+```
+
+Start/Stop background detection service:
+
+``` java
+    public void setServiceEnable(boolean enable) {
+        Intent intent = new Intent(action_enable);
+        intent.putExtra(KEY_CAMERA_ENABLE, enable);
+        intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
+        sendBroadcast(intent);
+        btnStartStopService.setEnabled(false);
+    }
+```
+
+You can get detectorId from dashboard, optional get detectorId via broadcast:
+
+``` java
+    public void getDetectorId() {
+        Intent intent = new Intent(action_get_detector_id);
+        sendBroadcast(intent);
+    }
+```
+
+Handling intent actions and callback messages:
+
+
+``` java
+    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive (Context context, Intent intent) {
+
+            String action = intent.getAction();
+            if (action.equals(action_detector_webhook)) {
+
+            }
+            else if (action.equals(action_on_detector_id)){
+
+            }
+            else if(action.equals(action_start)) {
+
+            }
+            else if(action.equals(action_stop)) {
+
+            }
+
+        }
+
+    };
+```
+
 
