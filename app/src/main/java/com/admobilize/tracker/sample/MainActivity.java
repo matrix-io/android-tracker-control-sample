@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private String detectorId;
     private TextView tvDeviceId;
     private TextView tvStatus;
+    private TextView tvWebhookData;
     private Button btnGetDeviceId;
     private Button btnStartStopService;
     private boolean toggle=true;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         btnStartStopService = findViewById(R.id.btn_start_stop);
         tvDeviceId          = findViewById(R.id.tv_deviceId);
         tvStatus            = findViewById(R.id.tv_status);
+        tvWebhookData       = findViewById(R.id.tv_webhook_data);
 
         btnGetDeviceId.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,7 +111,9 @@ public class MainActivity extends AppCompatActivity {
                 if (extras != null) {
                     String webhookdata = extras.getString("webhook");
                     if(webhookdata!=null){
-                        Log.d(TAG,"webhook: "+webhookdata);
+                        Log.d(TAG,"display webhook..");
+                        int length = webhookdata.length();
+                        tvWebhookData.setText(StringUtils.formatString(webhookdata, 0, length));
                     }
                 }
             }
