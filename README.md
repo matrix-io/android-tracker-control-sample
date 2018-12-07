@@ -1,6 +1,6 @@
 # Android Detector Control Sample
 
-Controling and receiving data from Android Detector App (builtin, cameraIp, AndroidThings AdBeacon detectors on Android).
+Controling and receiving data from Android Detector App (builtin, cameraIp, AndroidThings AdBeacon detectors on Android). <a href="https://github.com/matrix-io/android-tracker-control-sample/blob/master/screenshots/main.png"><img src="https://github.com/matrix-io/android-tracker-control-sample/blob/master/screenshots/main.png" align="right" width="240" ></a>
 
 ## Current Intent Actions
 
