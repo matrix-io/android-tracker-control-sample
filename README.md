@@ -35,6 +35,8 @@ Controling and receiving data from Android Detector App (builtin, cameraIp, Andr
 6. Launch Sample App
 7. Click on `GET DETECTOR` ID button
 8. If you got a ID detector click on `START/STOP` service
+9. The last detection should be showed in `Detection Data` section
+
 
 For more details please see oficial documentation
 
