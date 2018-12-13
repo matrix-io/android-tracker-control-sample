@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onServiceStop(String msg) {
 
-                Log.d(TAG,"onServiceStart");
+                Log.d(TAG,"onServiceStop: "+msg);
 
             }
 
