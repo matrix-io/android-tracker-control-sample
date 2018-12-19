@@ -4,7 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import admobilize.adtrackerlib.control.ConfigParameters;
 import admobilize.adtrackerlib.control.ConfigManager;
 import admobilize.adtrackerlib.control.OnDetectorActionListener;
 
@@ -49,26 +48,6 @@ public class MainActivity extends AppCompatActivity {
             public void onServiceStop(String msg) {
 
                 Log.d(TAG,"onServiceStop: "+msg);
-
-            }
-
-            @Override
-            public void onRequestConfigDetails() {
-
-            }
-
-            @Override
-            public void onUpdateConfigDetails(ConfigParameters params) {
-
-            }
-
-            @Override
-            public void onRequestPreview() {
-
-            }
-
-            @Override
-            public void onUpdatePreview(byte[] preview) {
 
             }
 
