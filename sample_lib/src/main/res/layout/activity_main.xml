@@ -1,18 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/btn_get_device_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="GET DETECTOR ID" />
+
     <TextView
+        android:id="@+id/tv_deviceId_hint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_below="@id/btn_get_device_id"
+        android:text="DeviceId:"
+        android:textSize="24sp" />
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/tv_deviceId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_deviceId_hint"
+        android:layout_marginTop="1dp"
+        android:text=""
+        android:textSize="19sp" />
+
+
+    <Button
+        android:id="@+id/btn_start_stop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_deviceId"
+        android:layout_marginTop="15dp"
+        android:text="start background service" />
+
+
+    <TextView
+        android:id="@+id/tv_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_start_stop"
+        android:layout_marginTop="1dp"
+        android:text=""
+        android:textAlignment="center"
+        android:textSize="19sp" />
+
+
+    <RelativeLayout
+        android:id="@+id/ll_seperator"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/tv_status"
+        android:layout_marginTop="3dp"
+        android:background="@color/colorPrimaryDark">
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tv_webhook_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_seperator"
+        android:text="Detection Data (webhook):"
+        android:textSize="24sp" />
+
+    <ScrollView
+        android:id="@+id/sv_webhook_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/tv_webhook_hint"
+        android:layout_margin="3dp">
+
+        <TextView
+            android:id="@+id/tv_webhook_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="not output"
+            android:textSize="8sp" />
+
+    </ScrollView>
+
+</RelativeLayout>
